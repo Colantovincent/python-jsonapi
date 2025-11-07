@@ -58,7 +58,7 @@ def success_response(
                 },
             },
         }
-    elif isinstance(attributes, list):
+    elif isinstance(attributes, (list, tuple)):
         doc = {
             "jsonapi": {"version": "1.1"},
             "data": []
@@ -73,6 +73,7 @@ def success_response(
                     "self": f"{resource_link}/{element_id}",
                 }
             }
+            doc["data"].append(temp)
     else:
         doc = {"jsonapi": {"version": "1.1"},}
     return json.dumps(doc)
